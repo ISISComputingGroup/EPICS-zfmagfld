@@ -1,0 +1,18 @@
+record(calcout, "$(P)STAT:POWER:_CALC")
+{
+  field(INPA, "$(P)VOLT.VAL CP MS")
+  field(CALC, "A > $(POWER_MIN_VOLT)") # PSU ON if voltage > $(POWER_MIN_VOLT) kV (defaults to 2 kV)
+  field(OUT,  "$(P)POWER:STAT")
+}
+
+record(bi, "$(P)POWER:STAT")
+{
+  field(DESC, "PSU Power Status")
+  field(INP, "$(P)STAT:POWER:_CALC CP")
+  field(DTYP, "Soft Channel")
+  field(ZNAM, "OFF")
+  field(ONAM, "ON")
+  field(SDIS, "$(P)DISABLE")
+}
+
+alias("$(P)POWER:STAT", "$(P)POWER")

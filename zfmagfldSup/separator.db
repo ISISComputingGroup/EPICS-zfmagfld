@@ -1,0 +1,39 @@
+record(bo, "$(P)SIM")
+{
+  field(SCAN, "Passive")
+  field(DTYP, "Soft Channel")
+  field(ZNAM, "NO")
+  field(ONAM, "YES")
+  field(VAL, "$(RECSIM=0)")
+}
+
+record(bo, "$(P)DISABLE")
+{
+  field(DESC, "Disable comms")
+  field(PINI, "YES")
+  field(VAL, "$(DISABLE=0)")
+  field(OMSL, "supervisory")
+  field(ZNAM, "COMMS ENABLED")
+  field(ONAM, "COMMS DISABLED")
+}
+
+# :ACQUIRE needs triggering and PINI, "YES" doesn't work on that record.
+# This is because init record C code updates record fields with values reported
+# hardware before PINI and scans, so PINI inits with VAL 0.
+record(bo, "$(P)DAQ:ACQUIRE:_TRIG") {
+  field(PINI,  "YES")
+  field(DESC,  "Starts the acquire task")
+  field(VAL,  "1")
+  field(OUT,  "$(P)DAQ:ACQUIRE PP")
+}
+
+record(bo, "$(P)DAQ:ACQUIRE")
+{
+  field(SCAN,  "Passive")
+  field(DTYP, "asynUInt32Digital")
+  field(OUT, "@asynMask(R0 0 0x01) ACQUIRE")
+  field(SDIS, "$(P)DISABLE")
+  field(ZNAM, "stop")
+  field(ONAM, "run")
+  field(TPRO,  "1")
+}
