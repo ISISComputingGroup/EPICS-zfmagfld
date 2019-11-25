@@ -1,0 +1,9 @@
+file zfmagfld.template { 
+  pattern 
+    {P, AXIS_INDEX, HW_AXIS, USER_AXIS}
+    
+    {"\$(P)", "0", "X", "L"}
+    {"\$(P)", "1", "Y", "T"}
+    {"\$(P)", "2", "Z", "V"}    
+
+}

@@ -1,0 +1,30 @@
+record(ai, "$(P)$(USER_AXIS)") {
+  field(DESC, "Calibrated field for axis $(USER_AXIS)")
+  field(DTYP, "Soft Channel")
+  
+  field(INP, "$(P)DAQ:$(HW_AXIS):_RAW CP")
+
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
+}
+
+record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
+{
+  field(SCAN,"1 second")
+  field(PINI, "NO")
+  $(IFNOTRECSIM)  field(DTYP, "asynFloat64")
+  $(IFRECSIM) field(DTYP, "Soft Channel")
+  field(PREC, "3")
+  field(INP, "@asyn(R0, 0, 1) DATA")
+
+  field(SIML, "$(P)SIM")
+  field(SIOL, "$(P)SIM:DAQ:$(HW_AXIS)")
+  field(SDIS, "$(P)DISABLE")
+}
+
+record(ai,  "$(P)SIM:DAQ:$(HW_AXIS)")
+{
+  field(DESC,  "Axis $(HW_AXIS) sim value")
+  field(FLNK, "$(P)DAQ:$(HW_AXIS):_RAW")
+  field(PREC, "3")
+}
