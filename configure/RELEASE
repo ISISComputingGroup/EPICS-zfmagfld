@@ -4,12 +4,4 @@
 include $(TOP)/../../../ISIS_CONFIG
 -include $(TOP)/../../../ISIS_CONFIG.$(EPICS_HOST_ARCH)
 
-#ASYN=$(SUPPORT)/asyn/master
-#BOOST=$(EPICS_ROOT)/libraries/master/boost
-#ONCRPC=$(SUPPORT)/oncrpc/master
-#SNCSEQ=$(SUPPORT)/seq/master
 UTILITIES=$(SUPPORT)/utilities/master
-#ASUBFUNCTIONS=$(SUPPORT)/asubFunctions/master
-#GTEST=$(SUPPORT)/googletest/master
-
-#separator=$(SUPPORT)/separator/EPICS-SEPRTR

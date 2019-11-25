@@ -42,12 +42,19 @@ record(ai, "$(P)DAQ:X:_RAW")
 {
   field(SCAN,"1 second")
   field(PINI, "NO")
-  field(DTYP, "asynFloat64ArrayIn")
-  field(PREC, "5")
-  field(INP, "@asyn(R0,0,1) DATA") #Port, Channel, Timeout 
+  $(IFNOTRECSIM)  field(DTYP, "asynFloat64")
+  $(IFRECSIM) field(DTYP, "Soft Channel")
+  field(PREC, "3")
+  field(INP, "@asyn(R0, 0, 1) DATA")
 
   field(SIML, "$(P)SIM")
-  field(SIOL, "$(P)DAQ:X:_RAW")
-  field(FLNK, "$(P)_APPLYVOLTCALIB")
+  field(SIOL, "$(P)SIM:DAQ:X")
   field(SDIS, "$(P)DISABLE")
+}
+
+record(ai,  "$(P)SIM:DAQ:X")
+{
+  field(DESC,  "Axis X sim value")
+  field(FLNK, "$(P)DAQ:X:_RAW")
+  field(PREC, "3")
 }
