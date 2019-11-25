@@ -8,6 +8,18 @@ record(ai, "$(P)$(USER_AXIS)") {
   info(archive, "VAL")
 }
 
+record(calc, "$(P)$(HW_AXIS):OFFSET") {
+  field(CALC, "A-B")
+
+  field(INPA, "$(P)DAQ:$(HW_AXIS):_RAW CP")
+  field(INPB, "$(OFFSET_$(HW_AXIS))")
+
+  field(ASG, "READONLY")
+
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
+}
+
 record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
 {
   field(SCAN,"1 second")
