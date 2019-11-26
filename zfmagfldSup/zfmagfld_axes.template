@@ -8,11 +8,21 @@ record(ai, "$(P)$(USER_AXIS)") {
   info(archive, "VAL")
 }
 
-record(calc, "$(P)$(HW_AXIS):OFFSET") {
+record(ai, "$(P)$(HW_AXIS):OFFSET"){
+  field(DESC, "Offset value for axis $(USER_AXIS)")
+  field(DTYP, "Soft Channel")
+
+  field(VAL, "$(OFFSET_$(HW_AXIS))")
+
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
+  }
+
+record(calc, "$(P)$(HW_AXIS):APPLYOFFSET") {
   field(CALC, "A-B")
 
   field(INPA, "$(P)DAQ:$(HW_AXIS):_RAW CP")
-  field(INPB, "$(OFFSET_$(HW_AXIS))")
+  field(INPB, "$(P)$(HW_AXIS):OFFSET")
 
   field(ASG, "READONLY")
 
