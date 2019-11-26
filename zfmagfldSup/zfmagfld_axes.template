@@ -8,6 +8,14 @@ record(ai, "$(P)$(USER_AXIS)") {
   info(archive, "VAL")
 }
 
+record(ai, "$(P)$(HW_AXIS):CORRECTEDFIELD"){
+  field(DESC, "Corrected field in axis $(USER_AXIS)")
+  field(DTYP, "Soft Channel")
+
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
+}
+
 record(ai, "$(P)$(HW_AXIS):OFFSET"){
   field(DESC, "Offset value for axis $(USER_AXIS)")
   field(DTYP, "Soft Channel")

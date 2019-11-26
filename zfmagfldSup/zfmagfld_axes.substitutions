@@ -1,4 +1,4 @@
-file zfmagfld.template { 
+file zfmagfld_axes.template { 
   pattern 
     {P, AXIS_INDEX, HW_AXIS, USER_AXIS}
     

@@ -1,0 +1,6 @@
+record(ai, "$(P)SENSORMATRIX:$(ROW)$(COLUMN)") {
+  field(DESC, "Element $(ROW), $(COLUMN) of sensor matrix")
+  field(DTYP, "Soft Channel")
+  
+  info(autosaveFields, "VAL")
+}
