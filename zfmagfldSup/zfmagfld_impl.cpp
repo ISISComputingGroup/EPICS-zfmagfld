@@ -97,33 +97,32 @@ long matrix_multiply_impl(aSubRecord *prec)
 
     gsl_vector* data_vector = gsl_vector_alloc(3);
 
-    gsl_vector_set(data_vector, 0, *(double*)prec->a);
-    gsl_vector_set(data_vector, 1, *(double*)prec->b);
-    gsl_vector_set(data_vector, 2, *(double*)prec->c);
+    gsl_vector_set(data_vector, 0, *(epicsFloat64*)prec->a);
+    gsl_vector_set(data_vector, 1, *(epicsFloat64*)prec->b);
+    gsl_vector_set(data_vector, 2, *(epicsFloat64*)prec->c);
 
     gsl_matrix *sensor_matrix = gsl_matrix_alloc(3, 3);
 
-    gsl_matrix_set(sensor_matrix, 0, 0, *(double*)prec->d);
-    gsl_matrix_set(sensor_matrix, 0, 1, *(double*)prec->e);
-    gsl_matrix_set(sensor_matrix, 0, 2, *(double*)prec->f);
-    gsl_matrix_set(sensor_matrix, 1, 0, *(double*)prec->g);
-    gsl_matrix_set(sensor_matrix, 1, 1, *(double*)prec->h);
-    gsl_matrix_set(sensor_matrix, 1, 2, *(double*)prec->i);
-    gsl_matrix_set(sensor_matrix, 2, 0, *(double*)prec->j);
-    gsl_matrix_set(sensor_matrix, 2, 1, *(double*)prec->k);
-    gsl_matrix_set(sensor_matrix, 2, 2, *(double*)prec->l);
+    gsl_matrix_set(sensor_matrix, 0, 0, *(epicsFloat64*)prec->d);
+    gsl_matrix_set(sensor_matrix, 0, 1, *(epicsFloat64*)prec->e);
+    gsl_matrix_set(sensor_matrix, 0, 2, *(epicsFloat64*)prec->f);
+    gsl_matrix_set(sensor_matrix, 1, 0, *(epicsFloat64*)prec->g);
+    gsl_matrix_set(sensor_matrix, 1, 1, *(epicsFloat64*)prec->h);
+    gsl_matrix_set(sensor_matrix, 1, 2, *(epicsFloat64*)prec->i);
+    gsl_matrix_set(sensor_matrix, 2, 0, *(epicsFloat64*)prec->j);
+    gsl_matrix_set(sensor_matrix, 2, 1, *(epicsFloat64*)prec->k);
+    gsl_matrix_set(sensor_matrix, 2, 2, *(epicsFloat64*)prec->l);
 
     gsl_vector* output_vector = gsl_vector_calloc(3); 
 
     gsl_blas_dgemv(CblasTrans, 1.0, sensor_matrix, data_vector, 0.0, output_vector);
-
     
     gsl_vector_free(data_vector);
     gsl_matrix_free(sensor_matrix);
 
-    *(double*)prec->vala = gsl_vector_get(output_vector, 0);
-    *(double*)prec->valb = gsl_vector_get(output_vector, 1);
-    *(double*)prec->valc = gsl_vector_get(output_vector, 2);
+    *(epicsFloat64*)prec->vala = gsl_vector_get(output_vector, 0);
+    *(epicsFloat64*)prec->valb = gsl_vector_get(output_vector, 1);
+    *(epicsFloat64*)prec->valc = gsl_vector_get(output_vector, 2);
 
     gsl_vector_free(output_vector);
     return 0; /* process output links */
