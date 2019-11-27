@@ -16,3 +16,58 @@ record(bo, "$(P)DISABLE")
   field(ZNAM, "COMMS ENABLED")
   field(ONAM, "COMMS DISABLED")
 }
+
+record(aSub, "$(P)CORRECTFIELD") {
+  field(DESC, "Applies calibration matrix op")
+  field(SNAM, "matrix_multiply")
+  field(SCAN, "1 second")
+
+  # Offset-shifted data from magnetometer
+  field(INPA, "$(P)X:APPLYOFFSET")
+  field(FTA, "DOUBLE")
+  
+  field(INPB, "$(P)Y:APPLYOFFSET")
+  field(FTB, "DOUBLE")
+  
+  field(INPC, "$(P)Z:APPLYOFFSET")
+  field(FTC, "DOUBLE")
+  
+  # Sensor matrix values
+  field(INPD, "$(P)SENSORMATRIX:11")
+  field(FTD, "DOUBLE")
+  
+  field(INPE, "$(P)SENSORMATRIX:12")
+  field(FTE, "DOUBLE")
+  
+  field(INPF, "$(P)SENSORMATRIX:13")
+  field(FTF, "DOUBLE")
+  
+  field(INPG, "$(P)SENSORMATRIX:21")
+  field(FTG, "DOUBLE")
+  
+  field(INPH, "$(P)SENSORMATRIX:22")
+  field(FTH, "DOUBLE")
+  
+  field(INPI, "$(P)SENSORMATRIX:23")
+  field(FTI, "DOUBLE")
+  
+  field(INPJ, "$(P)SENSORMATRIX:31")
+  field(FTJ, "DOUBLE")
+  
+  field(INPK, "$(P)SENSORMATRIX:32")
+  field(FTK, "DOUBLE")
+  
+  field(INPL, "$(P)SENSORMATRIX:33")
+  field(FTL, "DOUBLE")
+  
+  # Corrected field
+  field(OUTA, "$(P)X:CORRECTEDFIELD")
+  field(FTVA, "DOUBLE")
+
+  field(OUTB, "$(P)Y:CORRECTEDFIELD")
+  field(FTVB, "DOUBLE")
+
+  field(OUTC, "$(P)Z:CORRECTEDFIELD")
+  field(FTVC, "DOUBLE")
+
+}
