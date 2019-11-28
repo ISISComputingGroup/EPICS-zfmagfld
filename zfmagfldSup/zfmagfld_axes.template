@@ -21,6 +21,7 @@ record(ai, "$(P)$(HW_AXIS):OFFSET"){
   field(DTYP, "Soft Channel")
 
   field(VAL, "$(OFFSET_$(HW_AXIS))")
+  field(FLNK, "$(P)$(HW_AXIS):APPLYOFFSET.B")
 
   info(INTEREST, "HIGH")
   info(archive, "VAL")

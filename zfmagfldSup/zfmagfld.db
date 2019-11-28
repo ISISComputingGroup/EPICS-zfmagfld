@@ -70,4 +70,11 @@ record(aSub, "$(P)CORRECTFIELD") {
   field(OUTC, "$(P)Z:CORRECTEDFIELD")
   field(FTVC, "DOUBLE")
 
+  field(OUTD, "$(P)FIELDSTRENGTH")
+  field(FTVD, "DOUBLE")
+
+}
+
+record(ai, "$(P)FIELDSTRENGTH"){
+  field(DESC, "Corrected field magnitude")
 }

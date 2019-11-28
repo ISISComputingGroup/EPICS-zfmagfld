@@ -115,15 +115,20 @@ long matrix_multiply_impl(aSubRecord *prec)
 
     gsl_vector* output_vector = gsl_vector_calloc(3); 
 
-    gsl_blas_dgemv(CblasTrans, 1.0, sensor_matrix, data_vector, 0.0, output_vector);
+    gsl_blas_dgemv(CblasNoTrans, 1.0, sensor_matrix, data_vector, 0.0, output_vector);
     
-    gsl_vector_free(data_vector);
-    gsl_matrix_free(sensor_matrix);
+    double* field_strength;
+
+    gsl_blas_ddot(output_vector, output_vector, field_strength);
 
     *(epicsFloat64*)prec->vala = gsl_vector_get(output_vector, 0);
     *(epicsFloat64*)prec->valb = gsl_vector_get(output_vector, 1);
     *(epicsFloat64*)prec->valc = gsl_vector_get(output_vector, 2);
+    *(epicsFloat64*)prec->vald = sqrt(*field_strength);
 
+    
+    gsl_vector_free(data_vector);
+    gsl_matrix_free(sensor_matrix);
     gsl_vector_free(output_vector);
     return 0; /* process output links */
 }
