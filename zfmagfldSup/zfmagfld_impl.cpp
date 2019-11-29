@@ -95,12 +95,32 @@ long matrix_multiply_impl(aSubRecord *prec)
 		return 1;
 	}
 
+    if (prec->ftva != menuFtypeDOUBLE)
+	{
+        errlogSevPrintf(errlogMajor, "%s incorrect output argument type A", prec->name);
+		return 1;
+	}
+    
+    if (prec->ftvb != menuFtypeDOUBLE)
+	{
+        errlogSevPrintf(errlogMajor, "%s incorrect output argument type B", prec->name);
+		return 1;
+	}
+
+    if (prec->ftvc != menuFtypeDOUBLE)
+	{
+        errlogSevPrintf(errlogMajor, "%s incorrect output argument type C", prec->name);
+		return 1;
+	}
+
+    // Allocate vector and assign values from inputs
     gsl_vector* data_vector = gsl_vector_alloc(3);
 
     gsl_vector_set(data_vector, 0, *(epicsFloat64*)prec->a);
     gsl_vector_set(data_vector, 1, *(epicsFloat64*)prec->b);
     gsl_vector_set(data_vector, 2, *(epicsFloat64*)prec->c);
 
+    // Allocate matrix and assign values from inputs
     gsl_matrix *sensor_matrix = gsl_matrix_alloc(3, 3);
 
     gsl_matrix_set(sensor_matrix, 0, 0, *(epicsFloat64*)prec->d);
@@ -115,10 +135,24 @@ long matrix_multiply_impl(aSubRecord *prec)
 
     gsl_vector* output_vector = gsl_vector_calloc(3); 
 
+    /*
+     * dgemv is a BLAS standard function to multiply a matrix and a vector, implemented in gsl.
+     * We need to multiply the static field matrix by the measured field with the offset subtracted:
+     * output_vector = sensor_matrix * data_vector
+     * 
+     * CblasNoTrans means 'do not transpose the static field matrix'. It is provided by gsl.
+     * 
+     * 1.0 and 0.0 are scaling factors, used here to keep or remove terms in the equation dgemv solves.
+     * 
+     */
     gsl_blas_dgemv(CblasNoTrans, 1.0, sensor_matrix, data_vector, 0.0, output_vector);
     
     double* field_strength;
 
+    /* 
+     * Here we are calculating the magnitude of the field strength vector.
+     *  
+     */
     gsl_blas_ddot(output_vector, output_vector, field_strength);
 
     *(epicsFloat64*)prec->vala = gsl_vector_get(output_vector, 0);
