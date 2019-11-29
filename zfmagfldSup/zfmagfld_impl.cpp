@@ -133,36 +133,39 @@ long matrix_multiply_impl(aSubRecord *prec)
     gsl_matrix_set(sensor_matrix, 2, 1, *(epicsFloat64*)prec->k);
     gsl_matrix_set(sensor_matrix, 2, 2, *(epicsFloat64*)prec->l);
 
-    gsl_vector* output_vector = gsl_vector_calloc(3); 
+    gsl_vector* field_vector = gsl_vector_calloc(3); 
 
     /*
      * dgemv is a BLAS standard function to multiply a matrix and a vector, implemented in gsl.
      * We need to multiply the static field matrix by the measured field with the offset subtracted:
-     * output_vector = sensor_matrix * data_vector
+     * field_vector = sensor_matrix * data_vector
      * 
      * CblasNoTrans means 'do not transpose the static field matrix'. It is provided by gsl.
      * 
      * 1.0 and 0.0 are scaling factors, used here to keep or remove terms in the equation dgemv solves.
      * 
      */
-    gsl_blas_dgemv(CblasNoTrans, 1.0, sensor_matrix, data_vector, 0.0, output_vector);
+    gsl_blas_dgemv(CblasNoTrans, 1.0, sensor_matrix, data_vector, 0.0, field_vector);
     
     double* field_strength;
 
     /* 
-     * Here we are calculating the magnitude of the field strength vector.
-     *  
+     * Here we are calculating the magnitude of the field strength vector:
+     *    field strength^2 = field_x^2 + field_y^2 + field_z^2
+     * 
+     * The BLAS function ddot is used to calculate the dot product 
+     * of the field vector with itself.
      */
-    gsl_blas_ddot(output_vector, output_vector, field_strength);
+    gsl_blas_ddot(field_vector, field_vector, field_strength);
 
-    *(epicsFloat64*)prec->vala = gsl_vector_get(output_vector, 0);
-    *(epicsFloat64*)prec->valb = gsl_vector_get(output_vector, 1);
-    *(epicsFloat64*)prec->valc = gsl_vector_get(output_vector, 2);
-    *(epicsFloat64*)prec->vald = sqrt(*field_strength);
+    *(epicsFloat64*)prec->vala = gsl_vector_get(field_vector, 0); // X component
+    *(epicsFloat64*)prec->valb = gsl_vector_get(field_vector, 1); // Y component
+    *(epicsFloat64*)prec->valc = gsl_vector_get(field_vector, 2); // Z component
+    *(epicsFloat64*)prec->vald = sqrt(*field_strength); // Magnitude of field vector
 
     
     gsl_vector_free(data_vector);
     gsl_matrix_free(sensor_matrix);
-    gsl_vector_free(output_vector);
+    gsl_vector_free(field_vector);
     return 0; /* process output links */
 }
