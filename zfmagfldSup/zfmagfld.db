@@ -61,16 +61,16 @@ record(aSub, "$(P)CORRECTFIELD") {
   field(FTL, "DOUBLE")
   
   # Corrected field
-  field(OUTA, "$(P)X:CORRECTEDFIELD")
+  field(OUTA, "$(P)X:CORRECTEDFIELD PP")
   field(FTVA, "DOUBLE")
 
-  field(OUTB, "$(P)Y:CORRECTEDFIELD")
+  field(OUTB, "$(P)Y:CORRECTEDFIELD PP")
   field(FTVB, "DOUBLE")
 
-  field(OUTC, "$(P)Z:CORRECTEDFIELD")
+  field(OUTC, "$(P)Z:CORRECTEDFIELD PP")
   field(FTVC, "DOUBLE")
 
-  field(OUTD, "$(P)FIELDSTRENGTH")
+  field(OUTD, "$(P)FIELDSTRENGTH PP")
   field(FTVD, "DOUBLE")
 
 }
