@@ -12,9 +12,6 @@ record(ai, "$(P)$(HW_AXIS):OFFSET"){
   field(DESC, "Offset value for axis $(USER_AXIS)")
   field(DTYP, "Soft Channel")
 
-  field(FLNK, "$(P)$(HW_AXIS):APPLYOFFSET.B")
-
-  info(autosaveFields, "VAL")
   info(INTEREST, "HIGH")
   info(archive, "VAL")
   }
@@ -22,14 +19,22 @@ record(ai, "$(P)$(HW_AXIS):OFFSET"){
 record(calc, "$(P)$(HW_AXIS):APPLYOFFSET") {
   field(CALC, "A-B")
 
-  field(INPA, "$(P)DAQ:$(HW_AXIS):_RAW CP")
+  field(INPA, "$(P)MEASURED:$(HW_AXIS) MS")
   field(INPB, "$(P)$(HW_AXIS):OFFSET")
 
   field(ASG, "READONLY")
   field(FLNK, "$(FWDLINK)")
 
-  info(INTEREST, "HIGH")
-  info(archive, "VAL")
+}
+
+record(calc, "$(P)MEASURED:$(HW_AXIS)"){
+  field(DESC, "Measured field in $(HW_AXIS)")
+  field(CALC, "A*B")
+  
+  field(INPA, "$(P)DAQ:$(HW_AXIS):_RAW MS")
+  field(INPB, "$(P)RANGE CP")
+
+  field(FLNK, "$(P)$(HW_AXIS):APPLYOFFSET")
 }
 
 record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
@@ -40,7 +45,7 @@ record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
   $(IFRECSIM) field(DTYP, "Soft Channel")
   field(PREC, "3")
   field(INP, "@asyn(R0, 0, 1) DATA")
-  field(FLNK, "$(P)$(HW_AXIS):APPLYOFFSET")
+  field(FLNK, "$(P)MEASURED:$(HW_AXIS)")
 
   field(SIML, "$(P)SIM")
   field(SIOL, "$(P)SIM:DAQ:$(HW_AXIS)")

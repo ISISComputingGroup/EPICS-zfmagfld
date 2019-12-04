@@ -25,13 +25,13 @@ record(aSub, "$(P)CORRECTFIELD") {
   field(FLNK, "$(SQNCR="$(PVPREFIX):ZFCNTRL_01:INPUTS_UPDATED.PROC")")
 
   # Offset-shifted data from magnetometer
-  field(INPA, "$(P)X:APPLYOFFSET")
+  field(INPA, "$(P)X:APPLYOFFSET MS")
   field(FTA, "DOUBLE")
   
-  field(INPB, "$(P)Y:APPLYOFFSET")
+  field(INPB, "$(P)Y:APPLYOFFSET MS")
   field(FTB, "DOUBLE")
   
-  field(INPC, "$(P)Z:APPLYOFFSET")
+  field(INPC, "$(P)Z:APPLYOFFSET MS")
   field(FTC, "DOUBLE")
   
   # Sensor matrix values
@@ -75,12 +75,15 @@ record(aSub, "$(P)CORRECTFIELD") {
   field(OUTD, "$(P)FIELDSTRENGTH PP")
   field(FTVD, "DOUBLE")
 
-  field(TPRO, "1")
-
 }
 
 record(ai, "$(P)FIELDSTRENGTH"){
   field(DESC, "Corrected field magnitude")
+}
+
+record(ai, "$(P)RANGE"){
+  field(DESC, "Scale factor for magnetometer range")
+  field(VAL, "$(RANGE=1)")
 }
 
 alias("$(P)DAQ:X:_RAW", "$(P)TAKEDATA")
