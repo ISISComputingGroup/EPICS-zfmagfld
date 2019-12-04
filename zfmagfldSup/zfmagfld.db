@@ -20,7 +20,9 @@ record(bo, "$(P)DISABLE")
 record(aSub, "$(P)CORRECTFIELD") {
   field(DESC, "Applies calibration matrix op")
   field(SNAM, "matrix_multiply")
-  field(SCAN, "1 second")
+  field(SCAN, "Passive")
+
+  field(FLNK, "$(SQNCR="$(PVPREFIX):ZFCNTRL_01:INPUTS_UPDATED.PROC")")
 
   # Offset-shifted data from magnetometer
   field(INPA, "$(P)X:APPLYOFFSET")
@@ -73,8 +75,12 @@ record(aSub, "$(P)CORRECTFIELD") {
   field(OUTD, "$(P)FIELDSTRENGTH PP")
   field(FTVD, "DOUBLE")
 
+  field(TPRO, "1")
+
 }
 
 record(ai, "$(P)FIELDSTRENGTH"){
   field(DESC, "Corrected field magnitude")
 }
+
+alias("$(P)DAQ:X:_RAW", "$(P)TAKEDATA")

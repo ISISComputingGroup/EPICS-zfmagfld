@@ -26,6 +26,7 @@ record(calc, "$(P)$(HW_AXIS):APPLYOFFSET") {
   field(INPB, "$(P)$(HW_AXIS):OFFSET")
 
   field(ASG, "READONLY")
+  field(FLNK, "$(FWDLINK)")
 
   info(INTEREST, "HIGH")
   info(archive, "VAL")
@@ -33,12 +34,13 @@ record(calc, "$(P)$(HW_AXIS):APPLYOFFSET") {
 
 record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
 {
-  field(SCAN,"1 second")
+  field(SCAN, "Passive")
   field(PINI, "NO")
   $(IFNOTRECSIM)  field(DTYP, "asynFloat64")
   $(IFRECSIM) field(DTYP, "Soft Channel")
   field(PREC, "3")
   field(INP, "@asyn(R0, 0, 1) DATA")
+  field(FLNK, "$(P)$(HW_AXIS):APPLYOFFSET")
 
   field(SIML, "$(P)SIM")
   field(SIOL, "$(P)SIM:DAQ:$(HW_AXIS)")
@@ -48,6 +50,4 @@ record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
 record(ai,  "$(P)SIM:DAQ:$(HW_AXIS)")
 {
   field(DESC,  "Axis $(HW_AXIS) sim value")
-  field(FLNK, "$(P)DAQ:$(HW_AXIS):_RAW")
-  field(PREC, "3")
 }

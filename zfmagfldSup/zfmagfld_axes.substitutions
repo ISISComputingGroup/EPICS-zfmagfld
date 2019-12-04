@@ -1,9 +1,9 @@
 file zfmagfld_axes.template { 
   pattern 
-    {P, AXIS_INDEX, HW_AXIS, USER_AXIS}
+    {P, AXIS_INDEX, HW_AXIS, USER_AXIS, FWDLINK}
     
-    {"\$(P)", "0", "X", "L"}
-    {"\$(P)", "1", "Y", "T"}
-    {"\$(P)", "2", "Z", "V"}    
+    {"\$(P)", "0", "X", "L", "\$(P)DAQ:Y:_RAW"}
+    {"\$(P)", "1", "Y", "T", "\$(P)DAQ:Z:_RAW"}
+    {"\$(P)", "2", "Z", "V", "\$(P)CORRECTFIELD"}    
 
 }
