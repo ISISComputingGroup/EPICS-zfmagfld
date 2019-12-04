@@ -81,6 +81,20 @@ record(ai, "$(P)FIELDSTRENGTH"){
   field(DESC, "Corrected field magnitude")
 }
 
+record(calc, "$(P)OVERLOAD"){
+  field(DESC, "1 if magnetometer overloaded")
+
+  field(CALC, "max(A, B, C) > (D * 4.5)")
+
+  field(INPA, "$(P)MEASURED:X CP MS")
+  field(INPB, "$(P)MEASURED:Y CP MS")
+  field(INPC, "$(P)MEASURED:Z CP MS")
+  field(INPD, "$(P)RANGE")
+
+  field(HIGH, "1")
+  field(HSV, "MAJOR")
+}
+
 record(ai, "$(P)RANGE"){
   field(DESC, "Scale factor for magnetometer range")
   field(VAL, "$(RANGE=1)")
