@@ -6,6 +6,7 @@ include $(TOP)/configure/CONFIG
 DB += zfmagfld.db
 DB += zfmagfld_axes.db
 DB += zfmagfld_sensor_matrix.db
+DB += zfmagfld_errors.db
 
 LIBRARY_IOC = ZFMAGFLD
 DBD += zfmagfld.dbd
