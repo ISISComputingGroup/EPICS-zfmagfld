@@ -2,6 +2,7 @@ record(ai, "$(P)$(HW_AXIS):CORRECTEDFIELD"){
   field(DESC, "Corrected field in axis $(USER_AXIS)")
   field(DTYP, "Soft Channel")
 
+  field(EGU, "mG")
   field(PREC, "3")
 
   info(INTEREST, "HIGH")
@@ -34,6 +35,7 @@ record(calc, "$(P)MEASURED:$(HW_AXIS)"){
   field(INPA, "$(P)DAQ:$(HW_AXIS):_RAW MS")
   field(INPB, "$(P)RANGE")
 
+  field(EGU, "mG")
   info(INTEREST, "HIGH")
   info(archive, "VAL")
 
