@@ -63,22 +63,24 @@ record(aSub, "$(P)CORRECTFIELD") {
   field(FTL, "DOUBLE")
   
   # Corrected field
-  field(OUTA, "$(P)X:CORRECTEDFIELD PP")
+  field(OUTA, "$(P)X:CORRECTEDFIELD:RAW.A PP")
   field(FTVA, "DOUBLE")
 
-  field(OUTB, "$(P)Y:CORRECTEDFIELD PP")
+  field(OUTB, "$(P)Y:CORRECTEDFIELD:RAW.A PP")
   field(FTVB, "DOUBLE")
 
-  field(OUTC, "$(P)Z:CORRECTEDFIELD PP")
+  field(OUTC, "$(P)Z:CORRECTEDFIELD:RAW.A PP")
   field(FTVC, "DOUBLE")
 
-  field(OUTD, "$(P)FIELDSTRENGTH PP")
+  field(OUTD, "$(P)FIELDSTRENGTH:RAW.A PP")
   field(FTVD, "DOUBLE")
 
 }
 
 record(ai, "$(P)FIELDSTRENGTH"){
   field(DESC, "Corrected field magnitude")
+
+  field(PREC, "3")
 }
 
 record(calc, "$(P)OVERLOAD"){
