@@ -16,8 +16,6 @@ record(ai, "$(P)$(HW_AXIS):OFFSET"){
 
   field(VAL, "$(OFFSET$(HW_AXIS))")
 
-  info(INTEREST, "HIGH")
-  info(archive, "VAL")
   }
 
 record(calc, "$(P)$(HW_AXIS):APPLYOFFSET") {
@@ -26,9 +24,7 @@ record(calc, "$(P)$(HW_AXIS):APPLYOFFSET") {
   field(INPA, "$(P)MEASURED:$(HW_AXIS) MS")
   field(INPB, "$(P)$(HW_AXIS):OFFSET")
 
-  field(ASG, "READONLY")
   field(FLNK, "$(FWDLINK)")
-
 }
 
 record(calc, "$(P)MEASURED:$(HW_AXIS)"){
@@ -36,8 +32,12 @@ record(calc, "$(P)MEASURED:$(HW_AXIS)"){
   field(CALC, "A*B")
   
   field(INPA, "$(P)DAQ:$(HW_AXIS):_RAW MS")
-  field(INPB, "$(P)RANGE CP")
+  field(INPB, "$(P)RANGE")
 
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
+
+  field(ASG, "READONLY")
   field(FLNK, "$(P)$(HW_AXIS):APPLYOFFSET")
 }
 

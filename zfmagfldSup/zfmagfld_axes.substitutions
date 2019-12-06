@@ -4,13 +4,6 @@ file zfmagfld_axes.template {
     
     {"\$(P)", "0", "X", "L", "\$(P)DAQ:Y:_RAW"}
     {"\$(P)", "1", "Y", "T", "\$(P)DAQ:Z:_RAW"}
-    {"\$(P)", "2", "Z", "V", "\$(P)CORRECTFIELD"}    
+    {"\$(P)", "2", "Z", "V", "\$(P)OVERLOAD"}    
 
 }
-
-# file $(UTILITIES)/db/error_setter.template {
-#     pattern {P, STREAM_PV, PV_NAME}
-
-#     {"\$(P)", "\$(P)OVERLOAD", "\$(P)FIELDSTRENGTH"}
-
-# }
