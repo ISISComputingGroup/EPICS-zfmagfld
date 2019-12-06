@@ -147,7 +147,8 @@ long matrix_multiply_impl(aSubRecord *prec)
      */
     gsl_blas_dgemv(CblasNoTrans, 1.0, sensor_matrix, data_vector, 0.0, field_vector);
     
-    double* field_strength;
+    double fieldStrength = 0.0;
+    double* field_strength = &fieldStrength;
 
     /* 
      * Here we are calculating the magnitude of the field strength vector:
