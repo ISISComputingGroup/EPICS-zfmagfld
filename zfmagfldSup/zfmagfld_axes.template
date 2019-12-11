@@ -34,6 +34,7 @@ record(calc, "$(P)MEASURED:$(HW_AXIS)"){
   
   field(INPA, "$(P)DAQ:$(HW_AXIS):_RAW MS")
   field(INPB, "$(P)RANGE")
+  field(PREC, "3")
 
   field(EGU, "mG")
   info(INTEREST, "HIGH")
@@ -43,6 +44,8 @@ record(calc, "$(P)MEASURED:$(HW_AXIS)"){
   field(FLNK, "$(P)$(HW_AXIS):APPLYOFFSET")
 }
 
+alias("$(P)MEASURED:$(HW_AXIS)", "$(P)MEASURED:$(USER_AXIS)")
+
 record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
 {
   field(SCAN, "Passive")
@@ -50,7 +53,7 @@ record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
   $(IFNOTRECSIM)  field(DTYP, "asynFloat64")
   $(IFRECSIM) field(DTYP, "Soft Channel")
   field(PREC, "3")
-  field(INP, "@asyn(R0, 0, 1) DATA")
+  field(INP, "@asyn(R0, $(AXIS_INDEX), 1) DATA")
   field(FLNK, "$(P)MEASURED:$(HW_AXIS)")
 
   field(SIML, "$(P)SIM")
