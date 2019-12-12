@@ -16,7 +16,6 @@ record(ai, "$(P)$(HW_AXIS):OFFSET"){
   field(DTYP, "Soft Channel")
 
   field(VAL, "$(OFFSET$(HW_AXIS))")
-
   }
 
 record(calc, "$(P)$(HW_AXIS):APPLYOFFSET") {
@@ -34,6 +33,9 @@ record(calc, "$(P)MEASURED:$(HW_AXIS)"){
   
   field(INPA, "$(P)DAQ:$(HW_AXIS):_RAW MS")
   field(INPB, "$(P)RANGE")
+  field(INPC, "$(P)DAQ:X:_RAW MSS")
+  field(INPD, "$(P)DAQ:Y:_RAW MSS")
+  field(INPE, "$(P)DAQ:Z:_RAW MSS")
   field(PREC, "3")
 
   field(EGU, "mG")
