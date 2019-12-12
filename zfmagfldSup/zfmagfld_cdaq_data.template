@@ -1,0 +1,21 @@
+record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
+{
+  field(SCAN, "Passive")
+  field(PINI, "NO")
+  $(IFNOTRECSIM)  field(DTYP, "asynFloat64")
+  $(IFRECSIM) field(DTYP, "Soft Channel")
+  field(PREC, "3")
+  field(INP, "@asyn(R0, $(AXIS_INDEX), 1) DATA")
+  field(FLNK, "$(FWDLINK)")
+  #field(FLNK, "$(P)MEASURED:$(HW_AXIS)")
+
+  field(SIML, "$(P)SIM")
+  field(SIOL, "$(P)SIM:DAQ:$(HW_AXIS)")
+  field(SDIS, "$(P)DISABLE")
+}
+
+record(ai,  "$(P)SIM:DAQ:$(HW_AXIS)")
+{
+  field(DESC,  "Axis $(HW_AXIS) sim value")
+}
+
