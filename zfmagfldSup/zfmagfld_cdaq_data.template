@@ -7,7 +7,6 @@ record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
   field(PREC, "3")
   field(INP, "@asyn(R0, $(AXIS_INDEX), 1) DATA")
   field(FLNK, "$(FWDLINK)")
-  #field(FLNK, "$(P)MEASURED:$(HW_AXIS)")
 
   field(SIML, "$(P)SIM")
   field(SIOL, "$(P)SIM:DAQ:$(HW_AXIS)")
