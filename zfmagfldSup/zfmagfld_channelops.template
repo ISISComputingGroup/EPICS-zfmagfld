@@ -31,11 +31,11 @@ record(calc, "$(P)MEASURED:$(HW_AXIS)"){
   field(DESC, "Measured field in $(HW_AXIS)")
   field(CALC, "A*B")
   
-  field(INPA, "$(P)DAQ:$(HW_AXIS):_RAW MS")
+  field(INPA, "$(P)DAQ:$(HW_AXIS) MS")
   field(INPB, "$(P)RANGE")
-  field(INPC, "$(P)DAQ:X:_RAW MSS")
-  field(INPD, "$(P)DAQ:Y:_RAW MSS")
-  field(INPE, "$(P)DAQ:Z:_RAW MSS")
+  field(INPC, "$(P)DAQ:X MSS")
+  field(INPD, "$(P)DAQ:Y MSS")
+  field(INPE, "$(P)DAQ:Z MSS")
   field(PREC, "3")
 
   field(EGU, "mG")

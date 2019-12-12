@@ -109,4 +109,4 @@ record(ai, "$(P)RANGE"){
   field(VAL, "$(RANGE=1)")
 }
 
-alias("$(P)DAQ:X:_RAW", "$(P)TAKEDATA")
+alias("$(P)DAQ:X", "$(P)TAKEDATA")

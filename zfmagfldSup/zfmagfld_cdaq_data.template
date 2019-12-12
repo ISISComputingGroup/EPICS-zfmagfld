@@ -1,4 +1,4 @@
-record(ai, "$(P)DAQ:$(HW_AXIS):_RAW")
+record(ai, "$(P)DAQ:$(HW_AXIS)")
 {
   field(SCAN, "Passive")
   field(PINI, "NO")
