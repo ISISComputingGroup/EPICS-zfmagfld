@@ -14,6 +14,6 @@ file zfmagfld_channelops.template {
     
     {"\$(P)", "0", "X", "L", "\$(P)MEASURED:Y"}
     {"\$(P)", "1", "Y", "T", "\$(P)MEASURED:Z"}
-    {"\$(P)", "2", "Z", "V", "\$(P)OVERLOAD"}
+    {"\$(P)", "2", "Z", "V", "\$(P)OVERLOAD:_CALC"}
 
 }

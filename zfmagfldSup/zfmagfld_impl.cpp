@@ -17,6 +17,16 @@
 
 #include "zfmagfld.h"
 
+/**
+ * Deallocates the arrays used in to do the matrix multiplication
+ */
+void free_array_data(gsl_vector* data_vector, gsl_matrix* sensor_matrix, gsl_vector* field_vector){
+    gsl_vector_free(data_vector);
+    gsl_matrix_free(sensor_matrix);
+    gsl_vector_free(field_vector);
+}
+
+
 long matrix_multiply_impl(aSubRecord *prec) 
 {
     /*
@@ -164,9 +174,6 @@ long matrix_multiply_impl(aSubRecord *prec)
     *(epicsFloat64*)prec->valc = gsl_vector_get(field_vector, 2); // Z component
     *(epicsFloat64*)prec->vald = sqrt(*field_strength); // Magnitude of field vector
 
-    
-    gsl_vector_free(data_vector);
-    gsl_matrix_free(sensor_matrix);
-    gsl_vector_free(field_vector);
+    free_array_data(data_vector, sensor_matrix, field_vector);
     return 0; /* process output links */
 }

@@ -26,13 +26,13 @@ record(aSub, "$(P)CORRECTFIELD") {
   info(alarm, "ZFMAGFLD")
 
   # Offset-shifted data from magnetometer
-  field(INPA, "$(P)X:APPLYOFFSET MS")
+  field(INPA, "$(P)APPLYOFFSET:X MS")
   field(FTA, "DOUBLE")
   
-  field(INPB, "$(P)Y:APPLYOFFSET MS")
+  field(INPB, "$(P)APPLYOFFSET:Y MS")
   field(FTB, "DOUBLE")
   
-  field(INPC, "$(P)Z:APPLYOFFSET MS")
+  field(INPC, "$(P)APPLYOFFSET:Z MS")
   field(FTC, "DOUBLE")
   
   # Sensor matrix values
@@ -64,13 +64,13 @@ record(aSub, "$(P)CORRECTFIELD") {
   field(FTL, "DOUBLE")
   
   # Corrected field
-  field(OUTA, "$(P)X:CORRECTEDFIELD:RAW.A")
+  field(OUTA, "$(P)CORRECTEDFIELD:X:RAW.A PP")
   field(FTVA, "DOUBLE")
 
-  field(OUTB, "$(P)Y:CORRECTEDFIELD:RAW.A")
+  field(OUTB, "$(P)CORRECTEDFIELD:Y:RAW.A PP")
   field(FTVB, "DOUBLE")
 
-  field(OUTC, "$(P)Z:CORRECTEDFIELD:RAW.A")
+  field(OUTC, "$(P)CORRECTEDFIELD:Z:RAW.A PP")
   field(FTVC, "DOUBLE")
 
   field(OUTD, "$(P)FIELDSTRENGTH:RAW.A PP")
@@ -88,25 +88,41 @@ record(ai, "$(P)FIELDSTRENGTH"){
 
 }
 
-record(calc, "$(P)OVERLOAD"){
+record(calc, "$(P)OVERLOAD:_CALC"){
   field(DESC, "1 if magnetometer overloaded")
 
   field(CALC, "max(A, B, C) > (D * 4.5)")
 
-  field(INPA, "$(P)MEASURED:X MS")
-  field(INPB, "$(P)MEASURED:Y MS")
-  field(INPC, "$(P)MEASURED:Z MS")
+  field(INPA, "$(P)MEASURED:X MSS")
+  field(INPB, "$(P)MEASURED:Y MSS")
+  field(INPC, "$(P)MEASURED:Z MSS")
   field(INPD, "$(P)RANGE")
 
   field(HIGH, "1")
   field(HSV, "MAJOR")
 
+  field(FLNK, "$(P)OVERLOAD")
+
+  info(archive, "VAL")
+}
+
+record(bi, "$(P)OVERLOAD") {
+  field(DESC, "Is magnetometer overloaded")
+
+  field(INP, "$(P)OVERLOAD:_CALC MSS")
+
+  field(ONAM, "OVERLOADED")
+  field(ZNAM, "NORMAL")
   field(FLNK, "$(P)CORRECTFIELD")
+
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
 }
 
 record(ai, "$(P)RANGE"){
   field(DESC, "Scale factor for magnetometer range")
   field(VAL, "$(RANGE=1)")
+  field(PINI, "YES")
 }
 
 alias("$(P)DAQ:X", "$(P)TAKEDATA")
