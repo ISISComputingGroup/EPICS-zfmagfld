@@ -16,6 +16,8 @@ record(ai, "$(P)OFFSET:$(HW_AXIS)"){
   field(DTYP, "Soft Channel")
 
   field(VAL, "$(OFFSET$(HW_AXIS))")
+
+  field(ASG, "MANAGER")
   }
 
 record(calc, "$(P)APPLYOFFSET:$(HW_AXIS)") {
