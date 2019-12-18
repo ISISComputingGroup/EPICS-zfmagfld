@@ -22,7 +22,7 @@ record(aSub, "$(P)CORRECTFIELD") {
   field(SNAM, "matrix_multiply")
   field(SCAN, "Passive")
 
-  field(FLNK, "$(SQNCR="$(PVPREFIX)ZFCNTRL_01:INPUTS_UPDATED.PROC")")
+  field(FLNK, "$(SQNCR)")
   info(alarm, "ZFMAGFLD")
 
   # Offset-shifted data from magnetometer
