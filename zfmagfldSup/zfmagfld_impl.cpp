@@ -9,6 +9,7 @@
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_blas.h>
+#include <gsl/gsl_errno.h>
 
 #include <string>
 #include <vector>
@@ -29,10 +30,10 @@
  */
 long matrix_multiply_impl(aSubRecord *prec) 
 {
-    /*
-     * Validate input and output data types
-     */
+    // Disable default error handler for GSL as it terminates the process. Check return values instead.
+    gsl_set_error_handler_off();
 
+    // Validate input and output data types
     if (prec->fta != menuFtypeDOUBLE)
 	{
         errlogSevPrintf(errlogMajor, "%s incorrect argument type input A", prec->name);
@@ -171,8 +172,11 @@ long matrix_multiply_impl(aSubRecord *prec)
     status = gsl_blas_dgemv(CblasNoTrans, 1.0, sensor_matrix, data_vector, 0.0, field_vector);
 
     if (status) {
+        // Matrix multiplication failed
         errlogSevPrintf(errlogMajor, "GSL matrix multiplication (DGEMV) error %d, %s", status, gsl_strerror(status));
-    } else {
+    } 
+
+    if (!status) {
         /* 
          * DGEMV worked, calculate the magnitude of the field strength vector:
          *    field strength^2 = field_x^2 + field_y^2 + field_z^2
@@ -180,11 +184,12 @@ long matrix_multiply_impl(aSubRecord *prec)
          * The BLAS function ddot is used to calculate the dot product 
          * of the field vector with itself.
          */
-        status |= gsl_blas_ddot(field_vector, field_vector, field_strength);
-    }
+        status = gsl_blas_ddot(field_vector, field_vector, field_strength);
 
-    if (status){
-        errlogSevPrintf(errlogMajor, "GSL dot product (DDOT) error %d, %s", status, gsl_strerror(status));
+        if (status){
+            // Dot product failed
+            errlogSevPrintf(errlogMajor, "GSL dot product (DDOT) error %d, %s", status, gsl_strerror(status));
+        }
     }
 
     *(epicsFloat64*)prec->vala = gsl_vector_get(field_vector, 0); // X component
