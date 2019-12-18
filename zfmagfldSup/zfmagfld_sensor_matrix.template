@@ -2,5 +2,9 @@ record(ai, "$(P)SENSORMATRIX:$(ROW)$(COLUMN)") {
   field(DESC, "Element $(ROW), $(COLUMN) of sensor matrix")
   field(DTYP, "Soft Channel")
   
-  info(autosaveFields, "VAL")
+  field(EGU, "")
+  field(PREC, "3")
+  field(PINI, "YES")
+
+  info(archive, "VAL")
 }
