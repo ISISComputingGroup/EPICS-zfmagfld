@@ -1,19 +1,19 @@
 file zfmagfld_cdaq_data.template {
  pattern 
-    {P, AXIS_INDEX, HW_AXIS, USER_AXIS, FWDLINK}
+    {P, AXIS_INDEX, AXIS, FWDLINK}
 
-    {"\$(P)", "0", "X", "L", "\$(P)DAQ:Y"}
-    {"\$(P)", "1", "Y", "T", "\$(P)DAQ:Z"}
-    {"\$(P)", "2", "Z", "V", "\$(P)MEASURED:X"}
+    {"\$(P)", "0", "X", "\$(P)DAQ:Y"}
+    {"\$(P)", "1", "Y", "\$(P)DAQ:Z"}
+    {"\$(P)", "2", "Z", "\$(P)MEASURED:X"}
 
 }
 
 file zfmagfld_channelops.template { 
   pattern 
-    {P, AXIS_INDEX, HW_AXIS, USER_AXIS, FWDLINK}
+    {P, AXIS_INDEX, AXIS, FWDLINK}
     
-    {"\$(P)", "0", "X", "L", "\$(P)MEASURED:Y"}
-    {"\$(P)", "1", "Y", "T", "\$(P)MEASURED:Z"}
-    {"\$(P)", "2", "Z", "V", "\$(P)OVERLOAD:_CALC"}
+    {"\$(P)", "0", "X", "\$(P)MEASURED:Y"}
+    {"\$(P)", "1", "Y", "\$(P)MEASURED:Z"}
+    {"\$(P)", "2", "Z", "\$(P)OVERLOAD:_CALC"}
 
 }

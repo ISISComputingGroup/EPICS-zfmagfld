@@ -1,5 +1,5 @@
-record(ai, "$(P)CORRECTEDFIELD:$(HW_AXIS)"){
-  field(DESC, "Corrected field in axis $(USER_AXIS)")
+record(ai, "$(P)CORRECTEDFIELD:$(AXIS)"){
+  field(DESC, "Corrected field in axis $(AXIS)")
   field(DTYP, "Soft Channel")
 
   field(EGU, "mG")
@@ -9,31 +9,29 @@ record(ai, "$(P)CORRECTEDFIELD:$(HW_AXIS)"){
   info(archive, "VAL")
 }
 
-alias("$(P)CORRECTEDFIELD:$(HW_AXIS)", "$(P)$(USER_AXIS)")
-
-record(ai, "$(P)OFFSET:$(HW_AXIS)"){
-  field(DESC, "Offset value for axis $(USER_AXIS)")
+record(ai, "$(P)OFFSET:$(AXIS)"){
+  field(DESC, "Offset value for axis $(AXIS)")
   field(DTYP, "Soft Channel")
   field(PINI, "YES")
-  field(VAL, "$(OFFSET$(HW_AXIS))")
+  field(VAL, "$(OFFSET$(AXIS))")
 
   $(IFNOTRECSIM)  field(ASG, "MANAGER")
   }
 
-record(calc, "$(P)APPLYOFFSET:$(HW_AXIS)") {
+record(calc, "$(P)APPLYOFFSET:$(AXIS)") {
   field(CALC, "A-B")
 
-  field(INPA, "$(P)MEASURED:$(HW_AXIS) MS")
-  field(INPB, "$(P)OFFSET:$(HW_AXIS)")
+  field(INPA, "$(P)MEASURED:$(AXIS) MS")
+  field(INPB, "$(P)OFFSET:$(AXIS)")
 
   field(FLNK, "$(FWDLINK)")
 }
 
-record(calc, "$(P)MEASURED:$(HW_AXIS)"){
-  field(DESC, "Measured field in $(HW_AXIS)")
+record(calc, "$(P)MEASURED:$(AXIS)"){
+  field(DESC, "Measured field in $(AXIS)")
   field(CALC, "A*B")
   
-  field(INPA, "$(P)DAQ:$(HW_AXIS) MS")
+  field(INPA, "$(P)DAQ:$(AXIS) MS")
   field(INPB, "$(P)RANGE")
   field(INPC, "$(P)DAQ:X MSS")
   field(INPD, "$(P)DAQ:Y MSS")
@@ -45,8 +43,5 @@ record(calc, "$(P)MEASURED:$(HW_AXIS)"){
   info(archive, "VAL")
 
   field(ASG, "READONLY")
-  field(FLNK, "$(P)APPLYOFFSET:$(HW_AXIS)")
+  field(FLNK, "$(P)APPLYOFFSET:$(AXIS)")
 }
-
-alias("$(P)MEASURED:$(HW_AXIS)", "$(P)MEASURED:$(USER_AXIS)")
-

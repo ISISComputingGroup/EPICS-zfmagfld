@@ -1,4 +1,4 @@
-record(ai, "$(P)DAQ:$(HW_AXIS)")
+record(ai, "$(P)DAQ:$(AXIS)")
 {
   field(SCAN, "Passive")
   field(PINI, "NO")
@@ -9,12 +9,12 @@ record(ai, "$(P)DAQ:$(HW_AXIS)")
   field(FLNK, "$(FWDLINK)")
 
   field(SIML, "$(P)SIM")
-  field(SIOL, "$(P)SIM:DAQ:$(HW_AXIS)")
+  field(SIOL, "$(P)SIM:DAQ:$(AXIS)")
   field(SDIS, "$(P)DISABLE")
 }
 
-record(ai,  "$(P)SIM:DAQ:$(HW_AXIS)")
+record(ai,  "$(P)SIM:DAQ:$(AXIS)")
 {
-  field(DESC,  "Axis $(HW_AXIS) sim value")
+  field(DESC,  "Axis $(AXIS) sim value")
 }
 
