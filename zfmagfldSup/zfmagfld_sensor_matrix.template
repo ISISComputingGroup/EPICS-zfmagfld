@@ -3,7 +3,7 @@ record(ai, "$(P)SENSORMATRIX:$(ROW)$(COLUMN)") {
   field(DTYP, "Soft Channel")
   
   field(EGU, "")
-  field(PREC, "3")
+  field(PREC, "2")
   field(PINI, "YES")
 
   info(archive, "VAL")

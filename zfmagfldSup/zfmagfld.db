@@ -80,9 +80,10 @@ record(aSub, "$(P)CORRECTFIELD") {
 
 record(ai, "$(P)FIELDSTRENGTH"){
   field(DESC, "Corrected field magnitude")
-  field(PREC, "3")
+  field(PREC, "2")
   field(EGU, "mG")
 
+  field(ADEL, "0.05")
   info(INTEREST, "HIGH")
   info(archive, "VAL")
 
@@ -102,8 +103,6 @@ record(calc, "$(P)OVERLOAD:_CALC"){
   field(HSV, "MAJOR")
 
   field(FLNK, "$(P)OVERLOAD")
-
-  info(archive, "VAL")
 }
 
 record(bi, "$(P)OVERLOAD") {

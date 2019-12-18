@@ -3,7 +3,8 @@ record(ai, "$(P)CORRECTEDFIELD:$(AXIS)"){
   field(DTYP, "Soft Channel")
 
   field(EGU, "mG")
-  field(PREC, "3")
+  field(PREC, "2")
+  field(ADEL, "0.05")
 
   info(INTEREST, "HIGH")
   info(archive, "VAL")
@@ -14,6 +15,9 @@ record(ai, "$(P)OFFSET:$(AXIS)"){
   field(DTYP, "Soft Channel")
   field(PINI, "YES")
   field(VAL, "$(OFFSET$(AXIS))")
+
+  field(PREC, "2")
+  info(archive, "VAL")
 
   $(IFNOTRECSIM)  field(ASG, "MANAGER")
   }
@@ -36,8 +40,8 @@ record(calc, "$(P)MEASURED:$(AXIS)"){
   field(INPC, "$(P)DAQ:X MSS")
   field(INPD, "$(P)DAQ:Y MSS")
   field(INPE, "$(P)DAQ:Z MSS")
-  field(PREC, "3")
-
+  field(PREC, "2")
+  field(ADEL, "0.05")
   field(EGU, "mG")
   info(INTEREST, "HIGH")
   info(archive, "VAL")
