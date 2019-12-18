@@ -171,7 +171,7 @@ long matrix_multiply_impl(aSubRecord *prec)
     status = gsl_blas_dgemv(CblasNoTrans, 1.0, sensor_matrix, data_vector, 0.0, field_vector);
 
     if (status) {
-        errlosSevPrintf(errlogMajor, "GSL matrix multiplication (DGEMV) error %d, %s", status, gsl_strerror(status));
+        errlogSevPrintf(errlogMajor, "GSL matrix multiplication (DGEMV) error %d, %s", status, gsl_strerror(status));
     } else {
         /* 
          * DGEMV worked, calculate the magnitude of the field strength vector:
@@ -184,7 +184,7 @@ long matrix_multiply_impl(aSubRecord *prec)
     }
 
     if (status){
-        errlosSevPrintf(errlogMajor, "GSL dot product (DDOT) error %d, %s", status, gsl_strerror(status));
+        errlogSevPrintf(errlogMajor, "GSL dot product (DDOT) error %d, %s", status, gsl_strerror(status));
     }
 
     *(epicsFloat64*)prec->vala = gsl_vector_get(field_vector, 0); // X component
