@@ -14,10 +14,10 @@ alias("$(P)CORRECTEDFIELD:$(HW_AXIS)", "$(P)$(USER_AXIS)")
 record(ai, "$(P)OFFSET:$(HW_AXIS)"){
   field(DESC, "Offset value for axis $(USER_AXIS)")
   field(DTYP, "Soft Channel")
-
+  field(PINI, "YES")
   field(VAL, "$(OFFSET$(HW_AXIS))")
 
-  field(ASG, "MANAGER")
+  $(IFNOTRECSIM)  field(ASG, "MANAGER")
   }
 
 record(calc, "$(P)APPLYOFFSET:$(HW_AXIS)") {
