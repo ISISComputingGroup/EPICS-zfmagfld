@@ -10,7 +10,7 @@
 #include <gsl/gsl_vector.h>
 #include <gsl/gsl_blas.h>
 #include <gsl/gsl_errno.h>
-#include <math.h>
+#include <cmath>
 
 #include <string>
 #include <vector>
