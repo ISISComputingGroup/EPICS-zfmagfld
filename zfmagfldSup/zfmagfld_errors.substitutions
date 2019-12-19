@@ -1,0 +1,10 @@
+
+file $(UTILITIES)/db/error_setter.template {
+    pattern {P, STREAM_PV, PV_NAME}
+
+    {"\$(P)", "OVERLOAD:_CALC", "FIELDSTRENGTH"}
+    {"\$(P)", "OVERLOAD:_CALC", "CORRECTEDFIELD:X"}
+    {"\$(P)", "OVERLOAD:_CALC", "CORRECTEDFIELD:Y"}
+    {"\$(P)", "OVERLOAD:_CALC", "CORRECTEDFIELD:Z"}
+
+}

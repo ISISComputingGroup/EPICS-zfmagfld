@@ -1,0 +1,51 @@
+record(ai, "$(P)CORRECTEDFIELD:$(AXIS)"){
+  field(DESC, "Corrected field in axis $(AXIS)")
+  field(DTYP, "Soft Channel")
+
+  field(EGU, "mG")
+  field(PREC, "2")
+  field(ADEL, "0.05")
+
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
+}
+
+record(ai, "$(P)OFFSET:$(AXIS)"){
+  field(DESC, "Offset value for axis $(AXIS)")
+  field(DTYP, "Soft Channel")
+  field(PINI, "YES")
+  field(VAL, "$(OFFSET$(AXIS))")
+
+  field(PREC, "2")
+  info(archive, "VAL")
+
+  $(IFNOTRECSIM)  field(ASG, "MANAGER")
+  }
+
+record(calc, "$(P)APPLYOFFSET:$(AXIS)") {
+  field(CALC, "A-B")
+
+  field(INPA, "$(P)MEASURED:$(AXIS) MS")
+  field(INPB, "$(P)OFFSET:$(AXIS)")
+
+  field(FLNK, "$(FWDLINK)")
+}
+
+record(calc, "$(P)MEASURED:$(AXIS)"){
+  field(DESC, "Measured field in $(AXIS)")
+  field(CALC, "A*B")
+  
+  field(INPA, "$(P)DAQ:$(AXIS) MS")
+  field(INPB, "$(P)RANGE")
+  field(INPC, "$(P)DAQ:X MSS")
+  field(INPD, "$(P)DAQ:Y MSS")
+  field(INPE, "$(P)DAQ:Z MSS")
+  field(PREC, "2")
+  field(ADEL, "0.05")
+  field(EGU, "mG")
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
+
+  field(ASG, "READONLY")
+  field(FLNK, "$(P)APPLYOFFSET:$(AXIS)")
+}

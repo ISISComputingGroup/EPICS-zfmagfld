@@ -1,0 +1,127 @@
+record(bo, "$(P)SIM")
+{
+  field(SCAN, "Passive")
+  field(DTYP, "Soft Channel")
+  field(ZNAM, "NO")
+  field(ONAM, "YES")
+  field(VAL, "$(RECSIM=0)")
+}
+
+record(bo, "$(P)DISABLE")
+{
+  field(DESC, "Disable comms")
+  field(PINI, "YES")
+  field(VAL, "$(DISABLE=0)")
+  field(OMSL, "supervisory")
+  field(ZNAM, "COMMS ENABLED")
+  field(ONAM, "COMMS DISABLED")
+}
+
+record(aSub, "$(P)CORRECTFIELD") {
+  field(DESC, "Applies calibration matrix op")
+  field(SNAM, "matrix_multiply")
+  field(SCAN, "Passive")
+
+  field(FLNK, "$(SQNCR)")
+  info(alarm, "ZFMAGFLD")
+
+  # Offset-shifted data from magnetometer
+  field(INPA, "$(P)APPLYOFFSET:X MS")
+  field(FTA, "DOUBLE")
+  
+  field(INPB, "$(P)APPLYOFFSET:Y MS")
+  field(FTB, "DOUBLE")
+  
+  field(INPC, "$(P)APPLYOFFSET:Z MS")
+  field(FTC, "DOUBLE")
+  
+  # Sensor matrix values
+  field(INPD, "$(P)SENSORMATRIX:11")
+  field(FTD, "DOUBLE")
+  
+  field(INPE, "$(P)SENSORMATRIX:12")
+  field(FTE, "DOUBLE")
+  
+  field(INPF, "$(P)SENSORMATRIX:13")
+  field(FTF, "DOUBLE")
+  
+  field(INPG, "$(P)SENSORMATRIX:21")
+  field(FTG, "DOUBLE")
+  
+  field(INPH, "$(P)SENSORMATRIX:22")
+  field(FTH, "DOUBLE")
+  
+  field(INPI, "$(P)SENSORMATRIX:23")
+  field(FTI, "DOUBLE")
+  
+  field(INPJ, "$(P)SENSORMATRIX:31")
+  field(FTJ, "DOUBLE")
+  
+  field(INPK, "$(P)SENSORMATRIX:32")
+  field(FTK, "DOUBLE")
+  
+  field(INPL, "$(P)SENSORMATRIX:33")
+  field(FTL, "DOUBLE")
+  
+  # Corrected field
+  field(OUTA, "$(P)CORRECTEDFIELD:X:RAW.A PP")
+  field(FTVA, "DOUBLE")
+
+  field(OUTB, "$(P)CORRECTEDFIELD:Y:RAW.A PP")
+  field(FTVB, "DOUBLE")
+
+  field(OUTC, "$(P)CORRECTEDFIELD:Z:RAW.A PP")
+  field(FTVC, "DOUBLE")
+
+  field(OUTD, "$(P)FIELDSTRENGTH:RAW.A PP")
+  field(FTVD, "DOUBLE")
+
+}
+
+record(ai, "$(P)FIELDSTRENGTH"){
+  field(DESC, "Corrected field magnitude")
+  field(PREC, "2")
+  field(EGU, "mG")
+
+  field(ADEL, "0.05")
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
+
+}
+
+record(calc, "$(P)OVERLOAD:_CALC"){
+  field(DESC, "1 if magnetometer overloaded")
+
+  field(CALC, "max(A, B, C) > (D * 4.5)")
+
+  field(INPA, "$(P)MEASURED:X MSS")
+  field(INPB, "$(P)MEASURED:Y MSS")
+  field(INPC, "$(P)MEASURED:Z MSS")
+  field(INPD, "$(P)RANGE")
+
+  field(HIGH, "1")
+  field(HSV, "MAJOR")
+
+  field(FLNK, "$(P)OVERLOAD")
+}
+
+record(bi, "$(P)OVERLOAD") {
+  field(DESC, "Is magnetometer overloaded")
+
+  field(INP, "$(P)OVERLOAD:_CALC MSS")
+
+  field(ONAM, "OVERLOADED")
+  field(ZNAM, "NORMAL")
+  field(FLNK, "$(P)CORRECTFIELD")
+
+  info(INTEREST, "HIGH")
+  info(archive, "VAL")
+}
+
+record(ai, "$(P)RANGE"){
+  field(DESC, "Scale factor for magnetometer range")
+  field(VAL, "$(RANGE=1)")
+  field(PINI, "YES")
+}
+
+alias("$(P)DAQ:X", "$(P)TAKEDATA")
