@@ -10,17 +10,15 @@ record(ai, "$(P)DAQ:$(AXIS)")
   info(archive, "VAL")
   }
 
-record(waveform, "$(P)DAQ:$(AXIS):_RAW")
+record(ai, "$(P)DAQ:$(AXIS):_RAW")
 {
-  field(DESC, "Raw data from the DAQ")
+  field(DESC, "Raw DAQ data axis $(AXIS)")
   field(SCAN, "I/O Intr")
   field(PINI, "NO")
-  field(DTYP, "asynFloat64ArrayIn")
+  field(DTYP, "asynFloat64")
   field(PREC, "2")
   field(INP, "@asyn(R0, $(AXIS_INDEX), 1) DATA")
   field(EGU, "V")
-  field(NELM, "1")
-  field(FTVL, "DOUBLE")
 
   field(SIML, "$(P)SIM")
   field(SIOL, "$(P)SIM:DAQ:$(AXIS)")
