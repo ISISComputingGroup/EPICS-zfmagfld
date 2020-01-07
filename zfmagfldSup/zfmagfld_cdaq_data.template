@@ -13,9 +13,10 @@ record(ai, "$(P)DAQ:$(AXIS)")
 record(ai, "$(P)DAQ:$(AXIS):_RAW")
 {
   field(DESC, "Raw DAQ data axis $(AXIS)")
-  field(SCAN, "I/O Intr")
-  field(PINI, "NO")
-  field(DTYP, "asynFloat64")
+  $(IFNOTRECSIM)  field(SCAN, "I/O Intr")
+  $(IFNOTRECSIM)  field(PINI, "NO")
+  $(IFNOTRECSIM)  field(DTYP, "asynFloat64")
+  $(IFRECSIM) field(DTYP, "Soft Channel")
   field(PREC, "2")
   field(INP, "@asyn(R0, $(AXIS_INDEX), 1) DATA")
   field(EGU, "V")
@@ -28,5 +29,6 @@ record(ai, "$(P)DAQ:$(AXIS):_RAW")
 record(ai,  "$(P)SIM:DAQ:$(AXIS)")
 {
   field(DESC,  "Axis $(AXIS) sim value")
+  field(FLNK, "$(P)DAQ:$(AXIS):_RAW")
 }
 
