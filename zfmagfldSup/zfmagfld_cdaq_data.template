@@ -2,19 +2,32 @@ record(ai, "$(P)DAQ:$(AXIS)")
 {
   field(SCAN, "Passive")
   field(PINI, "NO")
+  field(PREC, "2")
+  field(INP, "$(P)DAQ:$(AXIS):_RAW MSS")
+  field(EGU, "V")
+  field(FLNK, "$(FWDLINK)")
+  
+  field(ADEL, 0.1)
+  info(archive, "VAL")
+  field(SDIS, "$(P)DISABLE")
+  }
+
+record(ai, "$(P)DAQ:$(AXIS):_RAW")
+{
+  field(DESC, "Raw DAQ data axis $(AXIS)")
+  $(IFNOTRECSIM)  field(SCAN, "I/O Intr")
+  $(IFNOTRECSIM)  field(PINI, "NO")
   $(IFNOTRECSIM)  field(DTYP, "asynFloat64")
   $(IFRECSIM) field(DTYP, "Soft Channel")
+  $(IFRECSIM) field(SCAN, ".1 second")
   field(PREC, "2")
   field(INP, "@asyn(R0, $(AXIS_INDEX), 1) DATA")
   field(EGU, "V")
-  field(FLNK, "$(FWDLINK)")
-  field(ADEL, 0.1)
-  info(archive, "VAL")
 
   field(SIML, "$(P)SIM")
   field(SIOL, "$(P)SIM:DAQ:$(AXIS)")
   field(SDIS, "$(P)DISABLE")
-}
+  }
 
 record(ai,  "$(P)SIM:DAQ:$(AXIS)")
 {
