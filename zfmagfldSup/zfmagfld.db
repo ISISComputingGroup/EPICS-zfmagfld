@@ -23,7 +23,6 @@ record(aSub, "$(P)CORRECTFIELD") {
   field(SCAN, "Passive")
 
   field(FLNK, "$(SQNCR)")
-  info(alarm, "ZFMAGFLD")
 
   # Offset-shifted data from magnetometer
   field(INPA, "$(P)APPLYOFFSET:X MS")
