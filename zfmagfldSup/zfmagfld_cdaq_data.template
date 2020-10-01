@@ -10,7 +10,9 @@ record(ai, "$(P)DAQ:$(AXIS)")
   field(ADEL, 0.1)
   info(archive, "VAL")
   field(SDIS, "$(P)DISABLE")
-  }
+  
+  info(alarm, "ZFMAGFLD")
+}
 
 record(ai, "$(P)DAQ:$(AXIS):_RAW")
 {
