@@ -1,0 +1,6 @@
+file zfmagfld_cdaq_data.template {
+ pattern 
+    {P, AXIS_INDEX, AXIS, FWDLINK, SCAN}
+
+    {"\$(P)", "3", "EXTRA", "", "1 second"}
+}
