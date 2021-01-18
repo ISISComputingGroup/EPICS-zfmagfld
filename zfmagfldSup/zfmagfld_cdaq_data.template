@@ -1,6 +1,6 @@
 record(ai, "$(P)DAQ:$(AXIS)")
 {
-  field(SCAN, "Passive")
+  field(SCAN, "$(SCAN=Passive)")
   field(PINI, "NO")
   field(PREC, "2")
   field(INP, "$(P)DAQ:$(AXIS):_RAW MSS")
