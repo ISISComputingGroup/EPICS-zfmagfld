@@ -47,5 +47,5 @@ record(compress, "$(P)DAQ:$(AXIS):_AVERAGE") {
   field(INP, "$(P)DAQ:$(AXIS):_BUFFER CP MSS")
   field(ALG, "N to 1 Average")
   field(NSAM, "1")
-  field(N, "$(NUM_SAMPLES)") # todo: add macro for this (default 10)
+  field(N, "$(NUM_SAMPLES)")
 }
