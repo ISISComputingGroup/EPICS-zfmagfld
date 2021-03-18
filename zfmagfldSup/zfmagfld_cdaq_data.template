@@ -3,7 +3,7 @@ record(ai, "$(P)DAQ:$(AXIS)")
   field(SCAN, "$(SCAN=Passive)")
   field(PINI, "NO")
   field(PREC, "2")
-  field(INP, "$(P)DAQ:$(AXIS):_AVERAGE PP MSS")
+  field(INP, "$(P)DAQ:$(AXIS):_AVERAGE MSS")
   field(EGU, "V")
   field(FLNK, "$(FWDLINK)")
   
@@ -29,7 +29,9 @@ record(ai, "$(P)DAQ:$(AXIS):_RAW")
   field(SIML, "$(P)SIM")
   field(SIOL, "$(P)SIM:DAQ:$(AXIS)")
   field(SDIS, "$(P)DISABLE")
-  }
+  
+  field(FLNK, "$(P)DAQ:$(AXIS):_BUFFER")
+}
 
 record(ai,  "$(P)SIM:DAQ:$(AXIS)")
 {
@@ -40,10 +42,11 @@ record(compress, "$(P)DAQ:$(AXIS):_BUFFER") {
   field(INP, "$(P)DAQ:$(AXIS):_RAW MSS")
   field(ALG, "Circular Buffer")
   field(NSAM, "$(NUM_SAMPLES)")
+  field(FLNK, "$(P)DAQ:$(AXIS):_AVERAGE")
 }
 
 record(compress, "$(P)DAQ:$(AXIS):_AVERAGE") {
-  field(INP, "$(P)DAQ:$(AXIS):_BUFFER PP MSS")
+  field(INP, "$(P)DAQ:$(AXIS):_BUFFER MSS")
   field(ALG, "N to 1 Average")
   field(NSAM, "1")
   field(N, "$(NUM_SAMPLES)")
