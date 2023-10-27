@@ -50,4 +50,20 @@ record(compress, "$(P)DAQ:$(AXIS):_AVERAGE") {
   field(ALG, "N to 1 Average")
   field(NSAM, "1")
   field(N, "$(NUM_SAMPLES)")
+#  field(FLNK, "$(P)DAQ:$(AXIS):_NOPS")
+}
+
+record(calc, "$(P)DAQ:$(AXIS):_NOPS")
+{
+    field(CALC, "A:=(A<100000?A+1:0);A")
+}
+
+## number of readings per second
+record(calc, "$(P)DAQ:$(AXIS):RATE")
+{
+    field(INPA, "$(P)DAQ:$(AXIS):_NOPS")
+	field(CALC, "(A<B?100000+A-B:A-B);B:=A")
+	field(SCAN, "1 second")
+    field(ADEL, "100")
+    info(archive, "5.0 VAL")
 }
