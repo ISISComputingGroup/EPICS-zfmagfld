@@ -8,10 +8,14 @@ record(ai, "$(P)DAQ:$(AXIS)")
   field(FLNK, "$(FWDLINK)")
   
   field(ADEL, 0.1)
-  info(archive, "VAL")
-  field(SDIS, "$(P)DISABLE")
+  info(archive, "5.0 VAL")
+  field(SDIS, "$(P)DISABLE CA")
   
   info(alarm, "ZFMAGFLD")
+  # we write to the PROC field of this via TAKEDATA alias, not
+  # sure if this triggers caPutLog but disable just in case as we
+  # write to it frequently
+  field(ASG, "NOTRAPW")
 }
 
 record(ai, "$(P)DAQ:$(AXIS):_RAW")
@@ -26,9 +30,9 @@ record(ai, "$(P)DAQ:$(AXIS):_RAW")
   field(INP, "@asyn(R0, $(AXIS_INDEX), 1) DATA")
   field(EGU, "V")
 
-  field(SIML, "$(P)SIM")
+  field(SIML, "$(P)SIM CA")
   field(SIOL, "$(P)SIM:DAQ:$(AXIS)")
-  field(SDIS, "$(P)DISABLE")
+  field(SDIS, "$(P)DISABLE CA")
   
   field(FLNK, "$(P)DAQ:$(AXIS):_BUFFER")
 }
