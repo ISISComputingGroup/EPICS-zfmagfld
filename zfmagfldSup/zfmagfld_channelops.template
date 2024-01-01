@@ -7,7 +7,7 @@ record(ai, "$(P)CORRECTEDFIELD:$(AXIS)"){
   field(ADEL, "0.05")
 
   info(INTEREST, "HIGH")
-  info(archive, "VAL")
+  info(archive, "5.0 VAL")
 }
 
 record(ai, "$(P)OFFSET:$(AXIS)"){
@@ -44,7 +44,7 @@ record(calc, "$(P)MEASURED:$(AXIS)"){
   field(ADEL, "0.05")
   field(EGU, "mG")
   info(INTEREST, "HIGH")
-  info(archive, "VAL")
+  info(archive, "5.0 VAL")
 
   field(ASG, "READONLY")
   field(FLNK, "$(P)APPLYOFFSET:$(AXIS)")
