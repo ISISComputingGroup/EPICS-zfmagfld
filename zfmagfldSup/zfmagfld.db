@@ -123,9 +123,9 @@ record(ai, "$(P)RANGE"){
   field(PINI, "YES")
 }
 
-$(IFFORCED_SCAN) alias("$(P)DAQ:X", "$(P)TAKEDATA")
+$(IFNOTFORCED_SCAN) alias("$(P)DAQ:X", "$(P)TAKEDATA")
 
-$(IFNOTFORCED_SCAN) record(ao, "$(P)TAKEDATA"){
-$(IFNOTFORCED_SCAN)   field(DESC, "Record which forces scans")
-$(IFNOTFORCED_SCAN)   field(SCAN, ".5 second")
-$(IFNOTFORCED_SCAN)   field(FLNK, "$(P)DAQ:X") }
+$(IFFORCED_SCAN) record(ao, "$(P)TAKEDATA"){
+$(IFFORCED_SCAN)   field(DESC, "Record which forces scans")
+$(IFFORCED_SCAN)   field(SCAN, ".5 second")
+$(IFFORCED_SCAN)   field(FLNK, "$(P)DAQ:X") }
