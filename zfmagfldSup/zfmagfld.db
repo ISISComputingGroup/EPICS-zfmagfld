@@ -91,7 +91,7 @@ record(ai, "$(P)FIELDSTRENGTH"){
 record(calc, "$(P)OVERLOAD:_CALC"){
   field(DESC, "1 if magnetometer overloaded")
 
-  field(CALC, "max(A, B, C) > (D * 4.5)")
+  field(CALC, "max(ABS(A), ABS(B), ABS(C)) > (D * 9.0)")
 
   field(INPA, "$(P)MEASURED:X MSS")
   field(INPB, "$(P)MEASURED:Y MSS")
